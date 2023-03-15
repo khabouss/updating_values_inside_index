@@ -3,6 +3,8 @@ def get_scroll_query():
         return the scroll query
     """
     return {
+        "size": 10000,
+        "_source": ["official_id"],
         "query": {
             "bool": {
                 "must": [
@@ -38,6 +40,7 @@ def get_regon_query(nip):
         return the regon query
     """
     return {
+        "_source": ["NIP"],
         "query": {
             "bool": {
                 "must": {
