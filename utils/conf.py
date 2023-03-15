@@ -5,7 +5,7 @@ from colorama import Fore
 
 load_dotenv()
 
-REQUEST_SIZE = 10
+REQUEST_SIZE = 1000
 MARCH_USER=os.getenv('MARCH_USER')
 MARCH_PASSWORD=os.getenv('MARCH_PASSWORD')
 if MARCH_USER is None or MARCH_PASSWORD is None:

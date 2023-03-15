@@ -7,6 +7,7 @@ from utils.conf import DISCOVERY_VALID
 from utils.queries import get_scroll_query
 from helpers import get_company_regon
 from helpers import update_ui
+from colorama import Fore
 import json
 
 def main():
@@ -35,7 +36,7 @@ def main():
                 payload=""
             current_prog += 1
         es.bulk_update(payload)
-    print("\n   Done")
+    print(Fore.CYAN + "\n   ** Done ** " + Fore.RESET)
 
 if __name__ == "__main__":
     main()
