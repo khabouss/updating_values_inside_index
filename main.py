@@ -29,4 +29,4 @@ for doc in es.next_scroll(queries.get_scroll_query(), conf.MARCH_INDEX_NAME, scr
             r = es.bulk_update(payload)
     current_prog += 1
 
-print("\nDone")
+print("\n   Done")

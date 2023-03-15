@@ -1,4 +1,7 @@
 def get_scroll_query():
+    """
+        return the scroll query
+    """
     return {
         "query": {
             "bool": {
@@ -31,6 +34,9 @@ def get_scroll_query():
 
 
 def get_regon_query(nip):
+    """
+        return the regon query
+    """
     return {
         "query": {
             "bool": {
