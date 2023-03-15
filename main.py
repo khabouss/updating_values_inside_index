@@ -16,8 +16,8 @@ def main():
     payload_size = 0
     search_payload = get_scroll_query()
     for doc in es.next_scroll(search_payload, MARCH_INDEX_NAME, scroll_time="10m", timeout=30):
-        update_ui(current_prog)
         for data in doc:
+            update_ui(current_prog)
             payload = ""
             # get company id in this case (>9) NIP
             nip = data['_source']['official_id'][0]
@@ -33,8 +33,8 @@ def main():
             if payload_size > REQUEST_SIZE:
                 es.bulk_update(payload)
                 payload=""
+            current_prog += 1
         es.bulk_update(payload)
-        current_prog += 1
     print("\n   Done")
 
 if __name__ == "__main__":
