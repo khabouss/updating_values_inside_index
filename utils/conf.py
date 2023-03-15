@@ -11,3 +11,4 @@ MARCH_INDEX_URL="http://172.16.84.68:9200"
 MARCH_INDEX_NAME="march_bot_dev"
 p = f"{MARCH_USER}:{MARCH_PASSWORD}".encode()
 MARCH_INDEX_AUTHORIZATION=f"Basic { base64.b64encode(p).decode() }"
+TRUST_ZONE_INDEX_NAME="aleo_raw_zone"
