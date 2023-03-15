@@ -1,49 +1,15 @@
-# import itertools
-
 from elasticlib.elasticlib import Elasticlib
 import utils.conf as conf
 import explorer
 import json
-import sys
+import utils.queries as queries
+import helpers
 
 es = Elasticlib(conf.MARCH_INDEX_URL, conf.MARCH_INDEX_AUTHORIZATION)
 
-query = {
-    "query": {
-        "bool": {
-            "must": [
-                {
-                    "term": {
-                        "discovery_status": {
-                            "value": "processed_not_added"
-                        }
-                    }
-                },
-                {
-                    "term": {
-                        "official_country": {
-                            "value": "PL"
-                        }
-                    }
-                }
-            ],
-            "filter": {
-                "script": {
-                    "script": """
-                        return doc['official_id'].value.length() > 9;
-                    """
-                }
-            }
-        }
-    }
-}
-
 current_prog = 0
-for doc in es.next_scroll(query, conf.MARCH_INDEX_NAME, scroll_time="10m", timeout=30):  # 22m
-    sys.stdout.write("\r{0}>".format("="*2))
-    sys.stdout.write("\033[92m CURRENT PROGRESS: \033[0m")
-    sys.stdout.write(" "+str(current_prog)+"/316")
-    sys.stdout.flush()
+for doc in es.next_scroll(queries.get_scroll_query(), conf.MARCH_INDEX_NAME, scroll_time="10m", timeout=30):  # 22m
+    helpers.update_ui(current_prog)
     for data in doc:
         payload_size = 0
         payload = ""
@@ -62,4 +28,5 @@ for doc in es.next_scroll(query, conf.MARCH_INDEX_NAME, scroll_time="10m", timeo
         if payload_size > conf.REQUEST_SIZE:
             r = es.bulk_update(payload)
     current_prog += 1
-print("\n")
+
+print("\nDone")
