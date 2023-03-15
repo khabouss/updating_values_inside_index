@@ -1,0 +1,1 @@
+MARCH_INDEX_NAME="aleo_raw_zone"
