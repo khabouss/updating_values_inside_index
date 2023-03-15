@@ -40,7 +40,7 @@ def get_regon_query(nip):
         return the regon query
     """
     return {
-        "_source": ["NIP"],
+        "_source": ["REGON"],
         "query": {
             "bool": {
                 "must": {
