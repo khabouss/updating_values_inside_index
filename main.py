@@ -3,6 +3,7 @@ from utils.conf import MARCH_INDEX_URL
 from utils.conf import MARCH_INDEX_AUTHORIZATION
 from utils.conf import MARCH_INDEX_NAME
 from utils.conf import REQUEST_SIZE
+from utils.conf import DISCOVERY_VALID
 from utils.queries import get_scroll_query
 from helpers import get_company_regon
 from helpers import update_ui
@@ -26,7 +27,7 @@ def main():
             # if found: add it to payload
             if regon is not None:
                 payload += json.dumps({"update": {"_index": MARCH_INDEX_NAME, "_id": id}}) + \
-                    "\n" + json.dumps({"doc": {"official_id": [regon]}}) + "\n"
+                    "\n" + json.dumps({"doc": {"official_id": [regon], "discovery_status": DISCOVERY_VALID}}) + "\n"
                 payload_size += 1
             # if payload has enough
             if payload_size > REQUEST_SIZE:
